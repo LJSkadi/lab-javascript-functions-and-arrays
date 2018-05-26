@@ -1,4 +1,7 @@
 // Find the maximum
+function maxOfTwoNumbers(x, y) {
+  return (x > y) ? x : y;
+}
 
 // Finding Longest Word
 var words = [
@@ -11,13 +14,60 @@ var words = [
   'crackpot'
 ];
 
-// Calculating a Sum
+// Function Declaration of the Longest Word finder
+function findLongestWord(words) {
+  // Check first if, there are words in the array
+  // If there is no word inside the array return undefined
+  if (words.length !== 0) {
+    var longJohn = words[0];
+    // If there are words in the array, compare them by their length
+    for (var i = 0; i < words.length; i++) {
+      // Return the first occurance if there are two words with the same length
+      longJohn = longJohn.length < words[i].length ? words[i] : longJohn;
+    }
+    return longJohn
+  }
+  return undefined
+}
 
+
+// Calculating a Sum
 var numbers = [6, 12, 1, 18, 13, 16, 2, 1, 8, 10];
 
-// Calculate the Average
+// Function Declaration for the sum
+function sumArray(numbers) {
+  var sum = 0;
+  // Function Declaration by Arrow Function Declaration
+  // Creation of a constant variable, which points to an anonymous function
+  // The anonymous function adds an actual value to an stored value
+  const reducer = (acc, curr) => acc + curr;
+  // Applying the reducer function on our array
+  // Calling the function reducer and giving it our created reducer variable as an anonymous callback-function
+  if (numbers.length !== 0) {
+    return sum = numbers.reduce(reducer);
+  }
+  return sum;
+}
 
+
+
+// Calculate the Average
 var numbersAvg = [2, 6, 9, 10, 7, 4, 1, 9];
+
+// Declaration of the function
+function averageNumbers(numbers) {
+  // Is the array containing any numbers?
+  // This protects us from deviding by Zero
+  if (numbers.length === 0) {
+    return undefined
+  } else {
+    var avg = numbers[0];
+    // calling the sum-function and devide the sum by the number of elements
+    avg = sumArray(numbers) / numbers.length;
+    return avg
+  }
+}
+
 
 // Array of Strings
 var wordsArr = [
@@ -32,6 +82,16 @@ var wordsArr = [
   'fuel',
   'palace'
 ];
+
+// Declaration of the function
+function averageWordLength(wordArr) {
+  // Creating an array, which includes the word length of all words
+  var avgWLength = [];
+  if (wordArr.length !== 0) {
+    // Solution with map
+    return averageNumbers(wordArr.map(function (elem) { return elem = elem.length }));
+  }
+}
 
 // Unique Arrays
 var wordsUnique = [
@@ -48,6 +108,26 @@ var wordsUnique = [
   'bring'
 ];
 
+// Declaration of the function
+function uniquifyArray(wordsUnique) {
+  var uniArr = [];
+  // Find the first occurence of a word and put it in an array
+  if (wordsUnique.length === 0) {
+    return undefined
+  }
+    for (var i = 0; i < wordsUnique.length; i++) {
+      uniArr.push(" ");
+      uniArr[wordsUnique.indexOf(wordsUnique[i])] = wordsUnique[i];
+    }
+    for (var i = uniArr.length - 1; i >= 0; i--) {
+      if (uniArr[i] === " ") {
+        uniArr.splice(i, 1)
+      }
+    }
+    return uniArr
+
+}
+
 // Finding Elements
 var wordsFind = [
   'machine',
@@ -59,6 +139,19 @@ var wordsFind = [
   'truth',
   'disobedience'
 ];
+
+//Declaration of function
+function doesWordExist(wordsFind, word) {
+  // Control if the array includes words --> return false
+  // Compare the words in the array with the word
+  // If word exist in the array return true, else false
+  if (wordsFind.length !== 0) {
+    for (var i = 0; i < wordsFind.length; i++) {
+      if (wordsFind[i] === word) { return true }
+    }
+  }
+  return false
+}
 
 // Counting Repetion
 var wordsCount = [
@@ -74,6 +167,20 @@ var wordsCount = [
   'disobedience',
   'matter'
 ];
+
+// Declaration of function
+function howManyTimes(wordsCount, word) {
+  var counter = 0;
+  if (wordsCount.length !== 0) {
+    for (var i = 0; i < wordsCount.length; i++) {
+      if (word === wordsCount[i]) {
+        counter += 1;
+      }
+    }
+    return counter;
+  }
+  return false;
+}
 // Bonus Quest
 
 var matrix = [
@@ -98,3 +205,22 @@ var matrix = [
   [20, 73, 35, 29, 78, 31, 90, 1, 74, 31, 49, 71, 48, 86, 81, 16, 23, 57, 5, 54],
   [1, 70, 54, 71, 83, 51, 54, 69, 16, 92, 33, 48, 61, 43, 52, 1, 89, 19, 67, 48]
 ];
+
+//Declaration of function
+function greatestProduct(matrix) {
+  var product = [];
+  var largestProduct = 0;
+  // Checking if the matrix includes elements
+  if (matrix.length !== 0) {
+    for (var row = 1; row < matrix.length; row++) {
+      // Creating a product matrix
+      product.push([]);
+      for (var col = 1; col < matrix.length; col++) {
+        product[row - 1].push(matrix[row - 1][col - 1] * matrix[row][col - 1] * matrix[row][col] * matrix[row - 1][col]);
+        // Find the greatest product
+        largestProduct = (largestProduct < product[row - 1][col - 1]) ? product[row - 1][col - 1] : largestProduct;
+      }
+    }
+  }
+  return largestProduct
+}
